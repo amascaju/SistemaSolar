@@ -224,7 +224,7 @@ pointlight.shadow.camera.far = 50
 scene.add(pointlight);
 
 const pointLightCameraHelper = new THREE.CameraHelper(pointlight.shadow.camera)
-scene.add(pointLightCameraHelper)
+//scene.add(pointLightCameraHelper)
 
 
 // DIRECTIONAL LIGHT
@@ -335,6 +335,18 @@ function loadModul(path, varObject, position, scale, addToObject){
     );
 }
 
+window.addEventListener('resize', () => {
+
+  // Update camera
+  camera.aspect = window.innerWidth / window.innerHeight
+  camera.updateProjectionMatrix()
+
+  // Update renderer
+  renderer.setSize(window.innerWidth, window.innerHeight)
+  renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2))
+})
+
+
 
 let time = Date.now();
 //Iniciam el bucle
@@ -347,7 +359,7 @@ function AnimationLoop(){
     time = thisTime;
 
     objects.forEach((obj) => {
-      obj.rotateY(0.001 * deltaTime);
+      obj.rotateZ(0.001 * deltaTime);
     });
     
     
